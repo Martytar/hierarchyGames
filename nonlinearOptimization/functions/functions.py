@@ -2,6 +2,17 @@ import sympy as sp
 import numpy as np
 
 
+class funPart():  # "часть функции" т. е. функция в ограниченной условиями области (для оптимальных управлений таких функций много непересекающихся областях)
+    def __init__(self, expression, restricts):
+        self.exp = expression
+        self.rest = restricts
+
+    def print(self):
+        print("Expression: ", self.exp)
+        for j in range(0, len(self.rest)):
+            print(f'Restrict {j}: {self.rest[j]}')
+        print()
+
 class f_v: #функция - оптимальное управление завода-производителя
 
     def __init__(self, funs, u):
@@ -28,6 +39,12 @@ class f_v: #функция - оптимальное управление зав�
                 break
 
         return res
+
+    def print(self):
+        print("Part function:")
+        for i in range(0, len(self.funs)):
+            print(f'Part {i}:')
+            self.funs[i].print()
 
 class f_f: #функция прибыли распределителя при оптимальности производственных центров
 

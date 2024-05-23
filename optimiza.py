@@ -1,7 +1,8 @@
 import numpy as np
 import sympy as sp
-import structs
+import nonlinearOptimization.functions.functions as funcs
 
+#тут методы для решения задачи параметрического симплекса, т. е. нахождение оптимальных переменных векторов в зависимости от параметра
 def findOptimalFunction(c, A, u):
 
     rest = np.array([])
@@ -65,12 +66,15 @@ def makeFunPart(tab, rest, basis): #задание 1 функции управл
         if basis[i] <= n:
             f[basis[i]-1] = tab[i, 0]
 
-    return structs.funPart(f, rest)
+    return funcs.funPart(f, rest)
 
 def makeTable(c, A, u): #задание симплексной таблицы
 
+    c = np.array(c)
+
     zer = np.diag(np.diag(np.ones((len(A), len(A)))))
-    z = np.append(np.append([0], -1*c), np.zeros(len(A)))
+
+    z = np.append(np.append([0], [-1*c]), np.zeros(len(A)))
 
     tab = np.row_stack((np.column_stack((u, A, zer)), z))
 

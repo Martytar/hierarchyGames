@@ -37,7 +37,7 @@ def fire_optimization(F, B,  t0, t1, x): #f-целевая функция,t0 -и
         df = -1*(F(x1) - F(x0)) #так как ищем максимум, а не минимум, разность инвертируем
         if np.random.random() < h(df, t):
             x0 = x1
-        print(x0)
+        #print(x0)
         k += 1
         t = t * np.exp(1)**(-1 * c * k ** (1 / len(x)))  # итеративное изменение температуры
 
