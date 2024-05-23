@@ -2,7 +2,7 @@ import sympy as sp
 import numpy as np
 
 
-class f_v:
+class f_v: #функция - оптимальное управление завода-производителя
 
     def __init__(self, funs, u):
         self.funs = funs
@@ -29,7 +29,7 @@ class f_v:
 
         return res
 
-class f_f:
+class f_f: #функция прибыли распределителя при оптимальности производственных центров
 
     def __init__(self, funcSet, coefSet, u):
         self.funkSet = funcSet

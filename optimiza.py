@@ -14,7 +14,8 @@ def findOptimalFunction(c, A, u):
 
 
 
-def solveTable(table, restricts, basis, pair = []):
+#симплекс-метод
+def solveTable(table, restricts, basis, pair = []): #параметры: 1)текущая симплексная таблица, 2)текущие ограничения, 3)индексы базисных переменных
 
     tab = np.copy(table)
     rest = np.copy(restricts)
@@ -46,7 +47,7 @@ def solveTable(table, restricts, basis, pair = []):
         return foundFuns
 
     else:
-        #если заданы ведущие строка и столбец, преобразуем таблицу и занаво запустим метод рекурсивно
+        #если заданы ведущие строка и столбец, преобразуем таблицу и заново запустим метод рекурсивно
         tab[int(pair[0]), :] /= tab[int(pair[0]), int(pair[1])]
         for i in range(0, len(tab)):
             if i != pair[0]:
@@ -55,7 +56,8 @@ def solveTable(table, restricts, basis, pair = []):
         base[int(pair[0])] = pair[1]
         return solveTable(tab, restricts, base)
 
-def makeFunPart(tab, rest, basis):
+def makeFunPart(tab, rest, basis): #задание 1 функции управления производителя на некоторой области. tab - симплекс-таблица, rest - текущее ограничение(ия), basis
+    # - индексы базисных переменных в симплекс-таблице
 
     n = len(tab[0, :]) - len(tab)
     f = sp.Matrix(np.zeros(n))
@@ -65,7 +67,7 @@ def makeFunPart(tab, rest, basis):
 
     return structs.funPart(f, rest)
 
-def makeTable(c, A, u):
+def makeTable(c, A, u): #задание симплексной таблицы
 
     zer = np.diag(np.diag(np.ones((len(A), len(A)))))
     z = np.append(np.append([0], -1*c), np.zeros(len(A)))
